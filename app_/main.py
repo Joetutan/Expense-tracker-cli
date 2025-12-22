@@ -1,5 +1,4 @@
-def main():
-    print("Hello from expense-tracker-cli!")
+from app_.core.cli import main
 
 
 if __name__ == "__main__":
