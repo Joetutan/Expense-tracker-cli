@@ -1,14 +1,56 @@
 from datetime import datetime
-Expenses_data = {}
+import json
+from pathlib import Path
+#from typing import Dict , Any
+
+ #---json read/write path---
+BASE_DIR = Path(__file__).resolve().parent
+file_path = BASE_DIR / "data.json"
+
+def init_data_struct() -> dict:
+    
+    #---check if file exists in file path
+    if file_path.exists():
+        with open(file_path, "r") as f:
+            expenses = json.load(f)
+        return expenses
+    else:
+        Expenses = dict[str, dict[str, dict[str, dict[str, object]]]]
+        expenses: Expenses = {} # type: ignore
+
+        return expenses
 
 
 def add_exp(category: str,  description:str, amount: int ) -> None:
-    #---generate unique ID---
-    task_id = len(Expenses_data)+1
-    #---genearte date item---
-    time_stamp = f'{datetime.now().strftime("%Y-%m-%d")}'
-    print("ID.  Date          Category    description                   amount")
-    print(f"{task_id}.    {time_stamp}    {category}         {description}                  ${amount}")
+
+    expenses = init_data_struct()
+
+    #---genearte date instances---
+    day = f'{datetime.now().strftime("%Y-%m-%d")}'
+    month = f'{datetime.now().strftime("%Y-%m")}'
+
+    if not expenses:
+        #---generate unique ID---
+        task_id = len(expenses)+1
+    else:
+        task_id = len(expenses)+1
+         #---avoid duplicate IDs---
+        while str(task_id) in expenses[month][day]:
+                    task_id += 1
+
+    #---create expense object---
+    expenses.setdefault(month, {})
+    expenses[month].setdefault(day, {})
+    expenses[month][day].setdefault(task_id,{})
+    expenses[month][day][task_id]["category"] = category
+    expenses[month][day][task_id]["description"] = description
+    expenses[month][day][task_id]["amount"] = amount
+
+    with open(file_path, "w") as f:
+            json.dump(expenses, f, indent=4)
+
+    #print("ID.  Date          Category    description                   amount")
+    #print(f"{task_id}.    {day}    {category}         {description}                  ${amount}")
 
 def update_exp(id:int, description:str, amount: int, category: str) -> None:
     print()
