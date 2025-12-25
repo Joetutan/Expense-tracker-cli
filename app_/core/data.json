@@ -16,6 +16,28 @@
                 "description": "subsription",
                 "amount": 50
             }
+        },
+        "2025-12-25": {
+            "1": {
+                "category": "gym",
+                "description": "subsription",
+                "amount": 50
+            },
+            "2": {
+                "category": "gym",
+                "description": "subsription",
+                "amount": 50
+            },
+            "3": {
+                "category": "gym",
+                "description": "subsription",
+                "amount": 50
+            },
+            "4": {
+                "category": "gym",
+                "description": "subscription",
+                "amount": 50
+            }
         }
     }
 }
