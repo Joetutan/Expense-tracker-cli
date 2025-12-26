@@ -27,8 +27,8 @@ def add_exp(category: str,  description:str, amount: int ) -> None:
     expenses = init_data_struct()
 
     #---genearte date instances---
-    day = f'{datetime.now().strftime("%Y-%m-%d")}'
-    month = f'{datetime.now().strftime("%Y-%m")}'
+    day = f'{datetime.now().strftime("%d")}'
+    month = f'{datetime.now().strftime("%m")}'
 
     if not expenses:
         #---generate unique ID---
@@ -72,11 +72,13 @@ def update_exp(id:int, description:str, amount: int, category: str) -> None:
 def delete_exp(id:str)->None:
     print()
 
-def list_exp(month_filter: int, date_filter: int)->None:
+def list_exp(monthly_filter: int, date_filter: int)->None:
+
     expenses = init_data_struct()
 
     if expenses:
-        if month_filter is None and date_filter is None:
+
+        if monthly_filter is None and date_filter is None:
                 # --- Print all if no arguments parsed ---
                 for k,v in expenses.items():
                     print(k)
@@ -92,30 +94,63 @@ def list_exp(month_filter: int, date_filter: int)->None:
                             amount = expenses[k][a][ID]["amount"]
                         
                             print(f"  {ID} ---- {category} ---- {description} ---- ${amount}")
-        elif month_filter is not None and date_filter is None:
-                #--- Print filter by month only
+                    
+
+        elif monthly_filter is not None and date_filter is None:
+                #--- Print filter by month only ---
+                for k,v in expenses.items():
+                    if k == str(monthly_filter):
+                        for a,b in v.items():
+                            print("  __________")
+                            print(f"  {a}")
+                            print("  __________")
+                            print("  ID ---- Category ---- Description ---- Amount")
+                            print("  _______________________________________________")
+                            for ID in b:
+                                category = expenses[k][a][ID]["category"]
+                                description = expenses[k][a][ID]["description"]
+                                amount = expenses[k][a][ID]["amount"]
+                            
+                                print(f"  {ID} ---- {category} ---- {description} ---- ${amount}")
+                    else:
+                         continue
+        elif monthly_filter is None and date_filter is not None:
+                # --- filter by date ---
                 for k,v in expenses.items():
                     print(k)
                     for a,b in v.items():
-                        print("  __________")
-                        print(f"  {a}")
-                        print("  __________")
-                        print("  ID ---- Category ---- Description ---- Amount")
-                        print("  _______________________________________________")
-                        for ID in b:
-                            category = expenses[k][a][ID]["category"]
-                            description = expenses[k][a][ID]["description"]
-                            amount = expenses[k][a][ID]["amount"]
-                        
-                            print(f"  {ID} ---- {category} ---- {description} ---- ${amount}")
+                        if a == str(date_filter):
+                            print("  __________")
+                            print(f"  {a}")
+                            print("  __________")
+                            print("  ID ---- Category ---- Description ---- Amount")
+                            print("  _______________________________________________")
+                            for ID in b:
+                                category = expenses[k][a][ID]["category"]
+                                description = expenses[k][a][ID]["description"]
+                                amount = expenses[k][a][ID]["amount"]
+                            
+                                print(f"  {ID} ---- {category} ---- {description} ---- ${amount}")
         else:
-                # --- filter by month and date
-                print()
+            # --- filter by date and month ---
+            for k,v in expenses.items():
+                if k == str(monthly_filter):
+                    for a,b in v.items():
+                        if a == str(date_filter):
+                            print("  __________")
+                            print(f"  {a}")
+                            print("  __________")
+                            print("  ID ---- Category ---- Description ---- Amount")
+                            print("  _______________________________________________")
+                            for ID in b:
+                                category = expenses[k][a][ID]["category"]
+                                description = expenses[k][a][ID]["description"]
+                                amount = expenses[k][a][ID]["amount"]
+                            
+                                print(f"  {ID} ---- {category} ---- {description} ---- ${amount}")
                     
     else:
          print("No expenses in the books")
-    
-    print()
 
 def set_budget(budget:int)->None:
     print()
