@@ -1,5 +1,5 @@
 import argparse
-from app_.core.core_functions import add_exp,list_exp,update_exp,delete_exp
+from app_.core.core_functions import add_exp,list_exp,update_exp,delete_exp,summary_exp
 
 
 def main() ->None:
@@ -33,8 +33,13 @@ def main() ->None:
 
     update_parser.add_argument("-c","--category", default=None, type=str,help="update expense category")
     update_parser.add_argument("-d","--description", default=None, type=str , help="update expense description")
-    update_parser.add_argument("-a","--amount", default=None,type=int, help="update amount spent")
+    update_parser.add_argument("-a","--amount", default=None,type=int, help="update expense amount")
 
+    # --- provide total expenses summary ---
+    summary_parser = subparsers.add_parser("summary",  help="Total amount spent for the month")
+    summary_parser.add_argument("-m","--month", type=int, choices=range(1, 13), metavar="MM",  help="Summary filtered by month (1–12)")
+    
+    
 
 
     args = parser.parse_args()
@@ -45,12 +50,14 @@ def main() ->None:
         case "list":
             list_exp(args.month, args.date)
         case "update":
-            if args.id is None or  args.month is None or args.date is None:
+            if args.ID is None or  args.month is None or args.date is None:
                 print(" --ID --month --date arguments needed for expense lookup.")
-            else:
-                update_exp(args.id, args.month, args.date, args.category, args.description, args.amount)
+            else: 
+                update_exp(str(args.ID), str(args.month), str(args.date), args.category, args.description, args.amount)
         case "delete":
             if args.ID is None or  args.month is None or args.date is None:
                 print(" --ID --month --date arguments needed for expense lookup.")
             else:
                 delete_exp(args.ID, args.month, args. date)
+        case "summary":
+            summary_exp(args.month)

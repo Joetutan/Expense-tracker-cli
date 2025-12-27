@@ -21,7 +21,7 @@
             "2": {
                 "category": "gym",
                 "description": "subsription",
-                "amount": 50
+                "amount": 78
             },
             "3": {
                 "category": "gym",
@@ -40,6 +40,14 @@
                 "description": "chinese-takeout",
                 "amount": 80
             }
-        }
+        },
+        "27": {
+            "1": {
+                "category": "food",
+                "description": "chinese-takeout",
+                "amount": 69
+            }
+        },
+        "total_count": 69
     }
 }

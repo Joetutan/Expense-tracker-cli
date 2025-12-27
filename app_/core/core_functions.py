@@ -47,16 +47,27 @@ def add_exp(category: str,  description:str, amount: int ) -> None:
     #---create expense object---
     expenses.setdefault(month, {})
     expenses[month].setdefault(day, {})
+    expenses[month].setdefault("total_count", 0)
+    expenses[month].setdefault("budget", 0)
     expenses[month][day].setdefault(task_id,{})
     expenses[month][day][task_id]["category"] = category
     expenses[month][day][task_id]["description"] = description
     expenses[month][day][task_id]["amount"] = amount
+    expenses[month]["total_count"] += amount
+    
 
     with open(file_path, "w") as f:
             json.dump(expenses, f, indent=4)
     
     print(f"Expense added successfully (ID: {task_id})")
 
+def summary_exp(month:int )->None:
+    expenses = init_data_struct()
+    if expenses:
+        running_total = expenses[str(month)]["total_count"]
+        print(f"Total expenses: {running_total}")
+    else: 
+        print("No expenses in the books yet")
 
 def list_exp(monthly_filter: int, date_filter: int)->None:
 
@@ -138,14 +149,26 @@ def list_exp(monthly_filter: int, date_filter: int)->None:
     else:
          print("No expenses in the books yet")
 
-def update_exp(id:int, month: int , date: int, category: str, description:str, amount: int ) -> None:
+def update_exp(id:str, month: str , date: str, category: str, description:str, amount: int ) -> None:
 
-    expense = init_data_struct()
+    expenses = init_data_struct()
 
-    if expense:
-        # lookup expense id
+    if expenses:
         
-        print()
+        if id in expenses[month][date]:
+                
+                if category is not None:
+                    expenses[month][date][id]["category"] = category
+                elif description is not None:
+                    expenses[month][date][id]["description"] = description
+                elif amount is not None:
+                    expenses[month][date][id]["amount"] = amount
+            
+                with open(file_path, "w") as f:
+                    json.dump(expenses, f, indent=4)
+    
+                print(f"Expense updated successfully (ID: {id})")
+            
     else:
         print("No expenses in the books yet")
 
@@ -154,7 +177,10 @@ def delete_exp(id:str, month: int, date: int)->None:
 
     if expenses:
         if id in expenses[str(month)][str(date)]:
-            
+
+            amount = expenses[str(month)][str(date)][id]["amount"]
+            expenses[month]["total_count"] -= amount
+
             expenses[str(month)][str(date)].pop(str(id))
             print(" # Expense deleted successfully")
 
@@ -165,8 +191,7 @@ def delete_exp(id:str, month: int, date: int)->None:
     else:
          print("No expenses in the books yet")
 
-def set_budget(budget:int)->None:
-    print()
+
 
 def export_to_csv()->None:
      print()
