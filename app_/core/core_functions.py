@@ -1,7 +1,6 @@
 from datetime import datetime
 import json
 from pathlib import Path
-#from typing import Dict , Any
 
  #---json read/write path---
 BASE_DIR = Path(__file__).resolve().parent
@@ -57,20 +56,7 @@ def add_exp(category: str,  description:str, amount: int ) -> None:
             json.dump(expenses, f, indent=4)
     
     print(f"Expense added successfully (ID: {task_id})")
-    #print("ID.  Date          Category    description                   amount")
-    #print(f"{task_id}.    {day}    {category}         {description}                  ${amount}")
 
-def update_exp(id:int, description:str, amount: int, category: str) -> None:
-
-    expense = init_data_struct()
-
-    if expense:
-         print()
-    else:
-         print()
-
-def delete_exp(id:str)->None:
-    print()
 
 def list_exp(monthly_filter: int, date_filter: int)->None:
 
@@ -150,7 +136,34 @@ def list_exp(monthly_filter: int, date_filter: int)->None:
                                 print(f"  {ID} ---- {category} ---- {description} ---- ${amount}")
                     
     else:
-         print("No expenses in the books")
+         print("No expenses in the books yet")
+
+def update_exp(id:int, month: int , date: int, category: str, description:str, amount: int ) -> None:
+
+    expense = init_data_struct()
+
+    if expense:
+        # lookup expense id
+        
+        print()
+    else:
+        print("No expenses in the books yet")
+
+def delete_exp(id:str, month: int, date: int)->None:
+    expenses = init_data_struct()
+
+    if expenses:
+        if id in expenses[str(month)][str(date)]:
+            
+            expenses[str(month)][str(date)].pop(str(id))
+            print(" # Expense deleted successfully")
+
+            with open(file_path, "w") as f:
+                    json.dump(expenses, f, indent=4)
+        else:
+            print("ID not found")
+    else:
+         print("No expenses in the books yet")
 
 def set_budget(budget:int)->None:
     print()

@@ -18,11 +18,6 @@
             }
         },
         "25": {
-            "1": {
-                "category": "gym",
-                "description": "subsription",
-                "amount": 50
-            },
             "2": {
                 "category": "gym",
                 "description": "subsription",
@@ -37,6 +32,13 @@
                 "category": "gym",
                 "description": "subscription",
                 "amount": 50
+            }
+        },
+        "26": {
+            "1": {
+                "category": "Food",
+                "description": "chinese-takeout",
+                "amount": 80
             }
         }
     }
