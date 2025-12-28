@@ -1,53 +1,19 @@
 {
     "12": {
-        "24": {
+        "28": {
             "1": {
-                "category": "gym",
-                "description": "subsription",
-                "amount": 50
+                "category": "Gym",
+                "description": "gym-subscription",
+                "amount": 75
             },
             "2": {
-                "category": "gym",
-                "description": "subsription",
-                "amount": 50
-            },
-            "3": {
-                "category": "gym",
-                "description": "subsription",
-                "amount": 50
-            }
-        },
-        "25": {
-            "2": {
-                "category": "gym",
-                "description": "subsription",
-                "amount": 78
-            },
-            "3": {
-                "category": "gym",
-                "description": "subsription",
-                "amount": 50
-            },
-            "4": {
-                "category": "gym",
-                "description": "subscription",
-                "amount": 50
-            }
-        },
-        "26": {
-            "1": {
-                "category": "Food",
-                "description": "chinese-takeout",
-                "amount": 80
-            }
-        },
-        "27": {
-            "1": {
                 "category": "food",
-                "description": "chinese-takeout",
-                "amount": 69
+                "description": "weekly-groceries",
+                "amount": 100
             }
         },
-        "total_count": 69
+        "total_count": 75,
+        "budget": 500,
+        "total_expenses": 100
     }
 }

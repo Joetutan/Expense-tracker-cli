@@ -47,13 +47,13 @@ def add_exp(category: str,  description:str, amount: int ) -> None:
     #---create expense object---
     expenses.setdefault(month, {})
     expenses[month].setdefault(day, {})
-    expenses[month].setdefault("total_count", 0)
+    expenses[month].setdefault("total_expenses", 0)
     expenses[month].setdefault("budget", 0)
     expenses[month][day].setdefault(task_id,{})
     expenses[month][day][task_id]["category"] = category
     expenses[month][day][task_id]["description"] = description
     expenses[month][day][task_id]["amount"] = amount
-    expenses[month]["total_count"] += amount
+    expenses[month]["total_expenses"] += amount
     
 
     with open(file_path, "w") as f:
@@ -64,7 +64,7 @@ def add_exp(category: str,  description:str, amount: int ) -> None:
 def summary_exp(month:int )->None:
     expenses = init_data_struct()
     if expenses:
-        running_total = expenses[str(month)]["total_count"]
+        running_total = expenses[str(month)]["total_expenses"]
         print(f"Total expenses: {running_total}")
     else: 
         print("No expenses in the books yet")
@@ -179,7 +179,7 @@ def delete_exp(id:str, month: int, date: int)->None:
         if id in expenses[str(month)][str(date)]:
 
             amount = expenses[str(month)][str(date)][id]["amount"]
-            expenses[month]["total_count"] -= amount
+            expenses[month]["total_expenses"] -= amount
 
             expenses[str(month)][str(date)].pop(str(id))
             print(" # Expense deleted successfully")
@@ -191,6 +191,20 @@ def delete_exp(id:str, month: int, date: int)->None:
     else:
          print("No expenses in the books yet")
 
+def set_budget(amount:int) ->None:
+    expenses = init_data_struct()
+    month = f'{datetime.now().strftime("%m")}'
+    
+    if expenses:
+          
+        expenses[month]["budget"] = amount
+
+    else:
+        expenses[month].setdefault("budget", 0)
+        expenses[month]["budget"] = amount
+
+    with open(file_path, "w") as f:
+        json.dump(expenses, f, indent=4)
 
 
 def export_to_csv()->None:

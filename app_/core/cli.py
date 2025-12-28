@@ -1,5 +1,5 @@
 import argparse
-from app_.core.core_functions import add_exp,list_exp,update_exp,delete_exp,summary_exp
+from app_.core.core_functions import add_exp,list_exp,update_exp,delete_exp,summary_exp,set_budget
 
 
 def main() ->None:
@@ -39,7 +39,9 @@ def main() ->None:
     summary_parser = subparsers.add_parser("summary",  help="Total amount spent for the month")
     summary_parser.add_argument("-m","--month", type=int, choices=range(1, 13), metavar="MM",  help="Summary filtered by month (1–12)")
     
-    
+    # - set budget for current month ---
+    set_budget_parser = subparsers.add_parser("budget", help="set budget for current month")
+    set_budget_parser.add_argument("-b", "--budget", type=int, help="budget limit amount")
 
 
     args = parser.parse_args()
@@ -61,3 +63,5 @@ def main() ->None:
                 delete_exp(args.ID, args.month, args. date)
         case "summary":
             summary_exp(args.month)
+        case "budget":
+            set_budget(args.budget)
