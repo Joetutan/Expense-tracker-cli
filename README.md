@@ -15,7 +15,7 @@ Simple expense tracker application to manage your finances. The application shou
 
 - Users can view a summary of expenses for a specific month (of current year).
 
-## Additional features that you can add to the application:
+## Additional features:
 
 - Add expense categories and allow users to filter expenses by category.
 
@@ -26,27 +26,35 @@ Simple expense tracker application to manage your finances. The application shou
 - The list of commands and their expected output is shown below:
 
 ```bash
-$ expense-tracker add --description "Lunch" --amount 20
+$ exp add --category Meals --description "Lunch" --amount 20
 # Expense added successfully (ID: 1)
 
-$ expense-tracker add --description "Dinner" --amount 10
+$ exp add --category Meals --description "Dinner" --amount 10
 # Expense added successfully (ID: 2)
 
-$ expense-tracker list
-# ID  Date       Description  Amount
-# 1   2024-08-06  Lunch        $20
-# 2   2024-08-06  Dinner       $10
+$ exp list --month 12 --date 30
 
-$ expense-tracker summary
-# Total expenses: $30
+#12
+#  __________
+#  30
+#  __________
+#  ID ---- Category ---- Description ---- Amount
+#  _______________________________________________
+#  1 ---- gym ---- monthly-subscription ---- $89.0
+#  2 ---- gym ---- monthly-subscription ---- $89.0
+#  3 ---- Meals ---- Lunch ---- $20.0
+#  4 ---- Meals ---- Dinner ---- $10.0
 
-$ expense-tracker delete --id 2
+$ exp summary
+# Total expenses: $208.0
+
+$ exp delete --id 2 --month 12 --date 30
 # Expense deleted successfully
 
-$ expense-tracker summary
-# Total expenses: $20
+$ exp summary
+# Total expenses: $119.0
 
-$ expense-tracker summary --month 8
-# Total expenses for August: $20
+$ expense-tracker summary --month 12
+# Total expenses for December: $119.0
 
 ```

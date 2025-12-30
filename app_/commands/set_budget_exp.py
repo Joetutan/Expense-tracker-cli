@@ -2,6 +2,11 @@ from app_.infra.storage import load_json, save_json
 from app_.infra.date_time import curr_month
 
 def set_budget(amount:int) ->None:
+
+    #---input validation---
+    if amount <= 0:
+        raise ValueError("Amount must be positive")
+    
     expenses = load_json()
     month = f'{curr_month()}'
     

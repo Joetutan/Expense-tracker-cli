@@ -6,13 +6,18 @@
                 "description": "monthly-subscription",
                 "amount": 89.0
             },
-            "2": {
-                "category": "gym",
-                "description": "monthly-subscription",
-                "amount": 89.0
+            "3": {
+                "category": "Meals",
+                "description": "Lunch",
+                "amount": 20.0
+            },
+            "4": {
+                "category": "Meals",
+                "description": "Dinner",
+                "amount": 10.0
             }
         },
-        "total_expenses": 178.0,
+        "total_expenses": 119.0,
         "budget": 500.0
     }
 }

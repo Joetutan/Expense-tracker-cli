@@ -2,6 +2,14 @@ from app_.infra.storage import load_json
 
 def list(monthly_filter: int, date_filter: int)->None:
 
+    #--- positive integer validation ---
+    if monthly_filter is not None:
+        if monthly_filter <= 0:
+            raise ValueError("Month must be positive integer (1-12)")
+    if date_filter is not None:
+        if date_filter <= 0:
+            raise ValueError("Date must be positive integer (1-31)")
+
     expenses = load_json()
 
     if expenses:

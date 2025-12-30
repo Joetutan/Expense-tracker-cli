@@ -6,26 +6,31 @@ from app_.infra.storage import load_json, save_json
 
 def add(category: str,  description:str, amount: int ) -> None:
 
+    # --- input validation ---
+    if amount <= 0:
+        raise ValueError("Amount must be positive")
+    if not category:
+        raise ValueError("Category required")
+    if not description:
+         raise ValueError("Description required")
+
     expenses = load_json()
 
-    #---genearte date instances---
+    #---generate date instances---
     day = f'{curr_date()}'
     month = f'{curr_month()}'
 
-    if not expenses:
+    #--- create unique expense id 
+    if expenses:
         #---generate unique ID---
-        task_id = 1
-    elif month not in expenses:
-        #---generate unique ID---
-        task_id = 1
-    elif day not in expenses[month]:
-        #---generate unique ID---
-        task_id = 1
-    else:
         task_id = len(expenses[month][day])+1
          #---avoid duplicate IDs---
         while str(task_id) in expenses[month][day]:
                     task_id += 1
+    else:
+        #---generate unique ID---
+        task_id = 1
+    
 
     #---create expense object---
     expenses.setdefault(month, {})
