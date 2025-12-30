@@ -20,7 +20,7 @@ def init_data_struct() -> dict:
 
         return expenses
 
-
+'''
 def add_exp(category: str,  description:str, amount: int ) -> None:
 
     expenses = init_data_struct()
@@ -60,7 +60,7 @@ def add_exp(category: str,  description:str, amount: int ) -> None:
             json.dump(expenses, f, indent=4)
     
     print(f"Expense added successfully (ID: {task_id})")
-
+'''
 def summary_exp(month:int )->None:
     expenses = init_data_struct()
     if expenses:
