@@ -1,6 +1,7 @@
 from app_.cli import parse_arguments
-from app_.core.core_functions import list_exp,update_exp,delete_exp,summary_exp,set_budget
+from app_.core.core_functions import list_exp,update_exp,delete_exp,set_budget
 from app_.commands.add_exp import add
+from app_.commands.summary_exp import summary
 
 def main():
 
@@ -22,7 +23,7 @@ def main():
             else:
                 delete_exp(args.ID, args.month, args. date)
         case "summary":
-            summary_exp(args.month)
+            summary(args.month)
         case "budget":
             set_budget(args.budget)
 
