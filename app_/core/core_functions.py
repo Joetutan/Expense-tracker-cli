@@ -1,7 +1,7 @@
 from datetime import datetime
 import json
 from pathlib import Path
-
+'''
  #---json read/write path---
 BASE_DIR = Path(__file__).resolve().parent
 file_path = BASE_DIR / "data.json"
@@ -20,7 +20,7 @@ def init_data_struct() -> dict:
 
         return expenses
 
-'''
+
 def add_exp(category: str,  description:str, amount: int ) -> None:
 
     expenses = init_data_struct()
@@ -60,7 +60,7 @@ def add_exp(category: str,  description:str, amount: int ) -> None:
             json.dump(expenses, f, indent=4)
     
     print(f"Expense added successfully (ID: {task_id})")
-'''
+
 def summary_exp(month:int )->None:
     expenses = init_data_struct()
     if expenses:
@@ -68,6 +68,7 @@ def summary_exp(month:int )->None:
         print(f"Total expenses: {running_total}")
     else: 
         print("No expenses in the books yet")
+
 
 def list_exp(monthly_filter: int, date_filter: int)->None:
 
@@ -149,6 +150,7 @@ def list_exp(monthly_filter: int, date_filter: int)->None:
     else:
          print("No expenses in the books yet")
 
+
 def update_exp(id:str, month: str , date: str, category: str, description:str, amount: int ) -> None:
 
     expenses = init_data_struct()
@@ -205,7 +207,7 @@ def set_budget(amount:int) ->None:
 
     with open(file_path, "w") as f:
         json.dump(expenses, f, indent=4)
-
+'''
 
 def export_to_csv()->None:
      print()
